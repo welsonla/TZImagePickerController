@@ -31,6 +31,7 @@
     UILabel *_numberLabel;
     UIButton *_originalPhotoButton;
     UILabel *_originalPhotoLabel;
+    UILabel *_titleLabel;
     
     CGFloat _offsetItemCount;
     
@@ -49,6 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"Edit photo";
     [TZImageManager manager].shouldFixOrientation = YES;
     TZImagePickerController *_tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     if (!_didSetIsSelectOriginalPhoto) {
@@ -125,9 +127,15 @@
     _indexLabel.textColor = [UIColor whiteColor];
     _indexLabel.textAlignment = NSTextAlignmentCenter;
     
+    _titleLabel = [[UILabel alloc] init];
+    _titleLabel.textColor = [UIColor whiteColor];
+    _titleLabel.font = [UIFont systemFontOfSize:14];
+    _titleLabel.text = self.isCropImage ? @"Edit photo" : @"";
+    
     [_naviBar addSubview:_selectButton];
     [_naviBar addSubview:_indexLabel];
     [_naviBar addSubview:_backButton];
+    [_naviBar addSubview:_titleLabel];
     [self.view addSubview:_naviBar];
 }
 
@@ -265,10 +273,14 @@
     CGFloat statusBarHeight = isFullScreen ? [TZCommonTools tz_statusBarHeight] : 0;
     CGFloat statusBarHeightInterval = isFullScreen ? (statusBarHeight - 20) : 0;
     CGFloat naviBarHeight = statusBarHeight + _tzImagePickerVc.navigationBar.tz_height;
+    CGSize titleSize = [_titleLabel sizeThatFits:CGSizeMake(300, 20)];
     _naviBar.frame = CGRectMake(0, 0, self.view.tz_width, naviBarHeight);
     _backButton.frame = CGRectMake(10, 10 + statusBarHeightInterval, 44, 44);
     _selectButton.frame = CGRectMake(self.view.tz_width - 56, 10 + statusBarHeightInterval, 44, 44);
     _indexLabel.frame = _selectButton.frame;
+    
+    _titleLabel.frame = CGRectMake((self.view.tz_width - titleSize.width)/2, 20, titleSize.width, 20);
+    _titleLabel.center = _naviBar.center;
     
     _layout.itemSize = CGSizeMake(self.view.tz_width + 20, self.view.tz_height);
     _layout.minimumInteritemSpacing = 0;
@@ -299,7 +311,7 @@
     [self configCropView];
     
     if (_tzImagePickerVc.photoPreviewPageDidLayoutSubviewsBlock) {
-        _tzImagePickerVc.photoPreviewPageDidLayoutSubviewsBlock(_collectionView, _naviBar, _backButton, _selectButton, _indexLabel, _toolBar, _originalPhotoButton, _originalPhotoLabel, _doneButton, _numberImageView, _numberLabel);
+        _tzImagePickerVc.photoPreviewPageDidLayoutSubviewsBlock(_collectionView, _naviBar, _backButton, _selectButton, _indexLabel, _toolBar, _titleLabel, _originalPhotoButton, _originalPhotoLabel, _doneButton, _numberImageView, _numberLabel);
     }
 }
 
