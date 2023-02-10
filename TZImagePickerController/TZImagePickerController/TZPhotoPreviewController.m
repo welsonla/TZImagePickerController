@@ -65,6 +65,8 @@
     [self configBottomToolBar];
     self.view.clipsToBounds = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeStatusBarOrientationNotification:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+    
+    _titleLabel.text = _tzImagePickerVc.allowCrop ? @"Edit photo" : @"";
 }
 
 - (void)setIsSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
@@ -129,8 +131,7 @@
     
     _titleLabel = [[UILabel alloc] init];
     _titleLabel.textColor = [UIColor whiteColor];
-    _titleLabel.font = [UIFont systemFontOfSize:14];
-    _titleLabel.text = self.isCropImage ? @"Edit photo" : @"";
+    _titleLabel.font = [UIFont systemFontOfSize:16];
     
     [_naviBar addSubview:_selectButton];
     [_naviBar addSubview:_indexLabel];
@@ -274,13 +275,12 @@
     CGFloat statusBarHeightInterval = isFullScreen ? (statusBarHeight - 20) : 0;
     CGFloat naviBarHeight = statusBarHeight + _tzImagePickerVc.navigationBar.tz_height;
     CGSize titleSize = [_titleLabel sizeThatFits:CGSizeMake(300, 20)];
-    _naviBar.frame = CGRectMake(0, 0, self.view.tz_width, naviBarHeight);
-    _backButton.frame = CGRectMake(10, 10 + statusBarHeightInterval, 44, 44);
-    _selectButton.frame = CGRectMake(self.view.tz_width - 56, 10 + statusBarHeightInterval, 44, 44);
+    _naviBar.frame = CGRectMake(0, 0, self.view.tz_width, naviBarHeight - 15);
+    _backButton.frame = CGRectMake(10, 5 + statusBarHeightInterval, 44, 44);
+    _selectButton.frame = CGRectMake(self.view.tz_width - 56, 5 + statusBarHeightInterval, 44, 44);
     _indexLabel.frame = _selectButton.frame;
     
-    _titleLabel.frame = CGRectMake((self.view.tz_width - titleSize.width)/2, 20, titleSize.width, 20);
-    _titleLabel.center = _naviBar.center;
+    _titleLabel.frame = CGRectMake((self.view.tz_width - titleSize.width)/2, 18+statusBarHeightInterval, titleSize.width, 20);
     
     _layout.itemSize = CGSizeMake(self.view.tz_width + 20, self.view.tz_height);
     _layout.minimumInteritemSpacing = 0;
