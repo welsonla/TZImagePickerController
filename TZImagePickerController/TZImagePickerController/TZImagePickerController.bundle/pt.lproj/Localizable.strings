@@ -11,6 +11,7 @@
 "Preview"                 = "Visualizar";
 "Full image"              = "Imagem Completa";
 "Processing..."           = "Em processamento...";
+"Edit Photo"              = "Imagens editadas";
 "No Photos or Videos"     = "Sem fotos ou vídeos";
 "Synchronizing photos from iCloud" = "Sincronizando fotos do iCloud";
 "iCloud sync failed"    = "iCloud falha na sincronização";

@@ -11,6 +11,7 @@
 "Preview"                 = "Avance";
 "Full image"              = "Imagen completa";
 "Processing..."           = "Tratamiento...";
+"Edit Photo"              = "Editar foto";
 "No Photos or Videos"     = "No hay fotos o videos";
 "Synchronizing photos from iCloud" = "Sincronizando fotos desde iCloud";
 "iCloud sync failed"    = "la sincronización falló";
