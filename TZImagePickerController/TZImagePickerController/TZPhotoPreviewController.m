@@ -50,7 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = [NSBundle tz_localizedStringForKey:@"Edit photo"]; ;
+    self.title = [NSBundle tz_localizedStringForKey:@"Edit photo"];
     [TZImageManager manager].shouldFixOrientation = YES;
     TZImagePickerController *_tzImagePickerVc = (TZImagePickerController *)self.navigationController;
     if (!_didSetIsSelectOriginalPhoto) {
@@ -66,7 +66,7 @@
     self.view.clipsToBounds = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeStatusBarOrientationNotification:) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     
-    _titleLabel.text = _tzImagePickerVc.allowCrop ? @"Edit photo" : @"";
+    _titleLabel.text = _tzImagePickerVc.allowCrop ? [NSBundle tz_localizedStringForKey:@"Edit photo"] : @"";
 }
 
 - (void)setIsSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto {
